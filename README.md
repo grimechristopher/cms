@@ -32,6 +32,6 @@ Responsive Design Solutions
 ---
 
 [grimechristopher.com](https://grimechristopher.com)  
-[chris@grimechristopher.com](mailto:chris@grimechristopher.com)  
+[chris@chrisgrime.com](mailto:chris@chrisgrime.com)  
 [linkedin/in/grimechristopher](https://linkedin/in/grimechristopher)  
 
