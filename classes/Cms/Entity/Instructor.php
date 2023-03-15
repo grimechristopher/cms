@@ -12,23 +12,6 @@ class Instructor {
 	const ACCESS_PAY_INFO = 64;
 	const IMPORT_AND_EXPORT = 128;
 
-	/*const EDIT_COURSES = 1;
-	const DELETE_COURSES = 2;
-	const ADD_DEPARTMENTS = 4;
-	const EDIT_DEPARTMENTS = 8;
-	const REMOVE_DEPARTMENTS = 16;
-	const EDIT_USER_ACCESS = 32;
-	const ADD_TIME_CODES = 64;
-	const EDIT_TIME_CODES = 128;
-	const DELETE_TIME_SLOTS = 256;
-	const EDIT_CAMPUSES = 512;
-	const ADD_CAMPUSES = 1024;
-	const EDIT_SUBJECTS = 2048;
-	const ADD_SUBJECTS = 4096;
-	const ADD_ATTRIBUTES = 8192;
-	const EDIT_ATTRIBUTES = 16384;
-	const REMOVE_ATTRIBUTES = 32768;*/
-
 	public $id;
 	public $firstname;
 	public $lastname;
