@@ -50,7 +50,7 @@
 			<?php endif; ?>
 			<td data-title="Name"><a href="index.php?instructor/profile?id=<?=$instructor->id;?>"><?=$instructor->firstname;?> <?=$instructor->middlename ?? ''?> <?=$instructor->lastname;?></a></td>	
 			<td data-title="Email"><a href="mailto:<?=htmlspecialchars($instructor->email, ENT_QUOTES, 'UTF-8'); ?>"> <?=$instructor->email;?></a></td>
-			<td data-title="Office Phone"><?=$instructor->officephone ?? "&nbsp;";?> </td>
+			<td data-title="Office Phone"><?=$instructor->phone ?? "&nbsp;";?> </td>
 			<td data-title="Faculty Category"><?php if ($instructor->getFacultyCategory() != null) {echo htmlspecialchars($instructor->getFacultyCategory()->name, ENT_QUOTES, 'UTF-8');} ?>&nbsp; </td>
 		</tr>
 		<?php endforeach; ?>
