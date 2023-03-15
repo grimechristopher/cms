@@ -41,7 +41,7 @@
     <input type="text" id="email" name="instructor[email]" value="<?=$instructor->email ?? $instructor['email'] ?? ''?>" >
 	</div>
 	<div class="form-row">
-	<label for="phone">Phone Number:</label>
+	<label for="phone">Office Phone:</label>
     <input type="text" id="phone" name="instructor[phone]" value="<?=$instructor->phone ?? $instructor['phone'] ?? ''?>">
 	</div>
 	<div class="form-row">
