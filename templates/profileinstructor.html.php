@@ -1,5 +1,9 @@
 <!--5-29-19 CGrime MOD : Changed all joke to course and author to instructor-->
 <!--<h2>CMS</h2>-->
+<div class="div-card-full">
+  <h2>Instructor Details
+  </h2>
+</div>
 <div class="div-card-full">  
   <h2>
     <?=$instructor->firstname?> 
