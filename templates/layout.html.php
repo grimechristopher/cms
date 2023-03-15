@@ -74,7 +74,7 @@
 
 	<footer>
 	<div class="div-card-full">
-		<p>&copy; 2019 <a href="mailto:christopher.grime@laverne.edu">christopher.grime@laverne.edu</a></p>
+		<p>See project on <a href="https://github.com/grimechristopher/cms">Github</a></p>
 	</div>
 	</footer>
 	</body>
