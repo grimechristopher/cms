@@ -105,7 +105,10 @@ class Course {
 							foreach($conflictingDays as $cd) {
 								if (strpos($cc->getTimeslot()->days, $cd) !== false) {
 									//If the day is found then break loop give warning
-									$warnings[] = $instructor->firstname . " " . $instructor->lastname . "'s " . $ic->title . " has a time conflicting with " . $cc->title;
+									// If the 'day' contains the word weekly -> Ignore it.
+									if ($cc->getTimeslot()->days != "weekly") {
+									    $warnings[] = $instructor->firstname . " " . $instructor->lastname . "'s " . $ic->title . " has a time conflicting with " . $cc->title;
+									}
 									break;
 								}
 							}
