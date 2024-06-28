@@ -260,15 +260,15 @@ class Course {
 			$course["tertiaryinstructor"] = null;
 		}
 
-		if ($course["primarypercentage"] == "NULL"){
+		if ($course["primarypercentage"] == ""){
 			$course["primarypercentage"] = '0';
 		}
 
-		if ($course["secondarypercentage"] == "NULL"){
+		if ($course["secondarypercentage"] == ""){
 			$course["secondarypercentage"] = '0';
 		}
 
-		if ($course["tertiarypercentage"] == "NULL"){
+		if ($course["tertiarypercentage"] == ""){
 			$course["tertiarypercentage"] = '0';
 		}
 
