@@ -1,6 +1,6 @@
 <?php
 // Load environment variables from .env file
-$env = parse_ini_file('/../.env'); // root of project
+$env = parse_ini_file('../.env'); // root of project
 
 // Set database credentials from .env variables
 $database_host = $env["DATABASE_HOST"];
