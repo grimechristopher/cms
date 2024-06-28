@@ -10,7 +10,7 @@ services:
     restart: unless-stopped
     env_file: .env
     ports:
-      - '8080:80'
+      - '8181:80'
     networks:
       - server-network
     labels:
@@ -34,7 +34,7 @@ services:
   phpmyadmin:
     image: phpmyadmin:latest
     ports:
-      - 8080:80
+      - 8182:80
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=mariadb
