@@ -1,21 +1,35 @@
 version: '3'
 
 services:
+  cms:
+    container_name: cms
+    image: cms
+    build:
+      context: .
+      dockerfile: Dockerfile
+  restart: unless-stopped
+  ports:
+    - '80:80'
+  networks:
+    - server-network
+  labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.cms.rule=Host(`cms.chrisgrime.com`)"
+    - "traefik.http.routers.cms.entrypoints=websecure"
+    - "traefik.http.routers.cms.tls.certresolver=myresolver"
+
   web:
     image: php74:latest
     ports:
       - '80:80'
     volumes:
-      - /Users/vincentb/Sites/_docker/apache:/etc/apache2/sites-enabled
-      - /Users/vincentb/Sites:/var/www/html
-      - /Users/vincentb/Sites/_docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./sites-enabled:/etc/apache2/sites-enabled
+      - ./html:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
     depends_on:
       - mariadb
-    extra_hosts:
-      - 'ax710.test:127.0.0.1'
-      # - 'some-other-host.test:127.0.0.1'
     networks:
-      - dev-env
+      - server-network
   phpmyadmin:
     image: phpmyadmin:latest
     ports:
@@ -26,24 +40,24 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - /Users/vincentb/Sites/_docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./php/php.ini:/usr/local/etc/php/php.ini
     networks:
-      - dev-env
+      - server-network
   mariadb:
     image: mariadb:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 'secret'
-      MYSQL_USER: 'vincentb'
-      MYSQL_PASSWORD: 'secret'
-      MYSQL_DATABASE: 'vincentb'
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: cms
     volumes:
-      - mysqldata:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
     ports:
       - 3306:3306
     networks:
-      - dev-env
-volumes:
-  mysqldata: {}
+      - server-network
+
 networks:
-  dev-env: {}
+  server-network:
+    external: true
