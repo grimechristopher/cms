@@ -263,8 +263,10 @@ class Course {
 		if ($valid == true) {
 			$course['dateadded'] = new \DateTime();
 			$courseEntity = $instructor->addCourse($course);
-			foreach ($_POST['attribute'] as $attributeid) {
-				$courseEntity->addAttribute($attributeid);
+			if (is_array($_POST['attribute'])) {
+				foreach ($_POST['attribute'] as $attributeid) {
+					$courseEntity->addAttribute($attributeid);
+				}
 			}
 			header('location: index.php?course/list'); 
 		}
