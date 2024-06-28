@@ -260,6 +260,18 @@ class Course {
 			$course["tertiaryinstructor"] = null;
 		}
 
+		if ($course["primarypercentage"] == "NULL"){
+			$course["primarypercentage"] = 0;
+		}
+
+		if ($course["secondarypercentage"] == "NULL"){
+			$course["secondarypercentage"] = 0;
+		}
+
+		if ($course["tertiarypercentage"] == "NULL"){
+			$course["tertiarypercentage"] = 0;
+		}
+
 		if ($valid == true) {
 			$course['dateadded'] = new \DateTime();
 			$courseEntity = $instructor->addCourse($course);
