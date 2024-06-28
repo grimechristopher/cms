@@ -7,10 +7,6 @@ $database_host = $env["DATABASE_HOST"];
 $database_user = $env["DATABASE_USER"];
 $database_password = $env["DATABASE_PASSWORD"];
 
-print('Database host: ' . $database_host . '<br>');
-print('Database user: ' . $database_user . '<br>');
-print('Database password: ' . $database_password . '<br>');
-
 // PDO database connection
 try {
     $pdo = new PDO('mysql:host=$database_host;dbname=cms;charset=utf8', $database_user, $database_password);
