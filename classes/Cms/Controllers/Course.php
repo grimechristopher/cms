@@ -261,15 +261,15 @@ class Course {
 		}
 
 		if ($course["primarypercentage"] == "NULL"){
-			$course["primarypercentage"] = 0;
+			$course["primarypercentage"] = '0';
 		}
 
 		if ($course["secondarypercentage"] == "NULL"){
-			$course["secondarypercentage"] = 0;
+			$course["secondarypercentage"] = '0';
 		}
 
 		if ($course["tertiarypercentage"] == "NULL"){
-			$course["tertiarypercentage"] = 0;
+			$course["tertiarypercentage"] = '0';
 		}
 
 		if ($valid == true) {
