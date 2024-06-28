@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
   restart: unless-stopped
   ports:
-    - '80:80'
+    - '8080:80'
   networks:
     - server-network
   labels:
@@ -18,18 +18,18 @@ services:
     - "traefik.http.routers.cms.entrypoints=websecure"
     - "traefik.http.routers.cms.tls.certresolver=myresolver"
 
-  web:
-    image: php74:latest
-    ports:
-      - '80:80'
-    volumes:
-      - ./sites-enabled:/etc/apache2/sites-enabled
-      - ./html:/var/www/html
-      - ./php/php.ini:/usr/local/etc/php/php.ini
-    depends_on:
-      - mariadb
-    networks:
-      - server-network
+  # web:
+  #   image: php74:latest
+  #   ports:
+  #     - '80:80'
+  #   volumes:
+  #     - ./sites-enabled:/etc/apache2/sites-enabled
+  #     - ./html:/var/www/html
+  #     - ./php/php.ini:/usr/local/etc/php/php.ini
+  #   depends_on:
+  #     - mariadb
+  #   networks:
+  #     - server-network
   phpmyadmin:
     image: phpmyadmin:latest
     ports:
@@ -43,6 +43,7 @@ services:
       - ./php/php.ini:/usr/local/etc/php/php.ini
     networks:
       - server-network
+      
   mariadb:
     image: mariadb:latest
     restart: always
@@ -57,6 +58,11 @@ services:
       - 3306:3306
     networks:
       - server-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pma.rule=Host(`pma.chrisgrime.com`)"
+      - "traefik.http.routers.pma.entrypoints=websecure"
+      - "traefik.http.routers.pma.tls.certresolver=myresolver"
 
 networks:
   server-network:
