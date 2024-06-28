@@ -6,8 +6,8 @@ try {
 
 	
 	//***********************JG  5/24/18 NEW line 8 - 42 ADAPTER to replace URL writing feature b/c .htaccess file is ignored by Apache********************	
-	print ('index.php 9: REQUEST_URI = ' . $_SERVER['REQUEST_URI'] . '<br>');  //DEBUG
-	print ('index.php: 10 ltrim route = ' . $route . '<br>');  //DEBUG
+	// print ('index.php 9: REQUEST_URI = ' . $_SERVER['REQUEST_URI'] . '<br>');  //DEBUG
+	// print ('index.php: 10 ltrim route = ' . $route . '<br>');  //DEBUG
 	
 	//5/22/18 JG NEW4l: adapter to the code b/c of the .htaccess is ignored by apache
 	if ($route == ltrim($_SERVER['REQUEST_URI'],  '/') ) {
@@ -71,8 +71,8 @@ try {
 	$route = strtok($route, '?'); //retrieve the string between ? ? - for e.g. index?course/edit?id=12
 	} 
 	
-	print ('index.php: 48 route = ' . $route . '<br>');  // JG test //DEBUG
-    print ('index.php: 49 REQUEST_METHOD = ' . $_SERVER['REQUEST_METHOD']. '<br>');  // JG test //DEBUG
+	// print ('index.php: 48 route = ' . $route . '<br>');  // JG test //DEBUG
+    // print ('index.php: 49 REQUEST_METHOD = ' . $_SERVER['REQUEST_METHOD']. '<br>');  // JG test //DEBUG
 	//****************************END OF JG  5/24/18 NEW line 8 - 42//****************************************************************************************
 
 	$entryPoint = new \Ninja\EntryPoint($route, $_SERVER['REQUEST_METHOD'], new \Cms\CmsRoutes());
