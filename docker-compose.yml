@@ -7,16 +7,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-  restart: unless-stopped
-  ports:
-    - '8080:80'
-  networks:
-    - server-network
-  labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.cms.rule=Host(`cms.chrisgrime.com`)"
-    - "traefik.http.routers.cms.entrypoints=websecure"
-    - "traefik.http.routers.cms.tls.certresolver=myresolver"
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - '8080:80'
+    networks:
+      - server-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cms.rule=Host(`cms.chrisgrime.com`)"
+      - "traefik.http.routers.cms.entrypoints=websecure"
+      - "traefik.http.routers.cms.tls.certresolver=myresolver"
 
   # web:
   #   image: php74:latest
@@ -43,7 +44,7 @@ services:
       - ./php/php.ini:/usr/local/etc/php/php.ini
     networks:
       - server-network
-      
+
   mariadb:
     image: mariadb:latest
     restart: always
