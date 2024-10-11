@@ -89,7 +89,7 @@
             <?=htmlspecialchars($instructor->firstname, ENT_QUOTES, 'UTF-8');?> <?=htmlspecialchars($instructor->lastname, ENT_QUOTES, 'UTF-8');?></option>
     <?php endforeach; ?>
     </select></div>
-        <div class="form-row"><label for="primarypercentage">Primary Percentage:</label><input type="text" id="primarypercentage" name="course[primarypercentage]" value="<?=$course->primarypercentage ?? $course['primarypercentage'] ?? ''?>"></div>
+        <div class="form-row"><label for="primarypercentage">Primary Percentage:</label><input type="text" id="primarypercentage" name="course[primarypercentage]" value="<?=$course->primarypercentage ?? $course['primarypercentage'] ?? '0'?>"></div>
     
 
     <div class="form-row">
@@ -101,7 +101,7 @@
             <?=htmlspecialchars($instructor->firstname, ENT_QUOTES, 'UTF-8');?> <?=htmlspecialchars($instructor->lastname, ENT_QUOTES, 'UTF-8');?></option>
     <?php endforeach; ?>
     </select></div>
-    <div class="form-row"><label for="secondarypercentage">Secondary Percentage:</label><input type="text" id="secondarypercentage" name="course[secondarypercentage]" value="<?=$course->secondarypercentage ?? $course['secondarypercentage'] ?? ''?>"></div>
+    <div class="form-row"><label for="secondarypercentage">Secondary Percentage:</label><input type="text" id="secondarypercentage" name="course[secondarypercentage]" value="<?=$course->secondarypercentage ?? $course['secondarypercentage'] ?? '0'?>"></div>
 
 
     <div class="form-row">
@@ -113,7 +113,7 @@
             <?=htmlspecialchars($instructor->firstname, ENT_QUOTES, 'UTF-8');?> <?=htmlspecialchars($instructor->lastname, ENT_QUOTES, 'UTF-8');?></option>
     <?php endforeach; ?>
     </select></div>
-    <div class="form-row"><label for="tertiarypercentage">Tertiary Percentage:</label><input type="text" id="tertiarypercentage" name="course[tertiarypercentage]" value="<?=$course->tertiarypercentage ?? $course['tertiarypercentage'] ?? ''?>"></div>
+    <div class="form-row"><label for="tertiarypercentage">Tertiary Percentage:</label><input type="text" id="tertiarypercentage" name="course[tertiarypercentage]" value="<?=$course->tertiarypercentage ?? $course['tertiarypercentage'] ?? '0'?>"></div>
 
     </div><!--End of div card  -->
 
