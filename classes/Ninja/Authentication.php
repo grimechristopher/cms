@@ -1,82 +1,54 @@
 <?php
 namespace Ninja;
 
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
-
 class Authentication {
-    private $users;
-    private $usernameColumn;
-    private $passwordColumn;
-    private $secretKey;
+	private $users;
+	private $usernameColumn;
+	private $passwordColumn;
 
-    public function __construct(DatabaseTable $users, $usernameColumn, $passwordColumn, $secretKey) {
-        $this->users = $users;
-        $this->usernameColumn = $usernameColumn;
-        $this->passwordColumn = $passwordColumn;
-        $this->secretKey = $secretKey;
-    }
+	public function __construct(DatabaseTable $users, $usernameColumn, $passwordColumn) {
+		session_start();
+		$this->users = $users;
+		$this->usernameColumn = $usernameColumn;
+		$this->passwordColumn = $passwordColumn;
+	}
 
-    public function login($username, $password) {
-        // Authenticate with Supabase and get JWT token
-        $supabaseUrl = 'https://your-supabase-url.supabase.co';
-        $supabaseKey = 'your-supabase-key';
-        $authUrl = $supabaseUrl . '/auth/v1/token?grant_type=password';
+	public function login($username, $password) {
+		$user = $this->users->find($this->usernameColumn, strtolower($username));
 
-        $data = [
-            'email' => $username,
-            'password' => $password
-        ];
+		if (!empty($user) && password_verify($password, $user[0]->{$this->passwordColumn})) {
+			session_regenerate_id();
+			$_SESSION['username'] = $username;
+			$_SESSION['password'] = $user[0]->{$this->passwordColumn};
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
-        $options = [
-            'http' => [
-                'header'  => "Content-type: application/json\r\nAuthorization: Bearer $supabaseKey\r\n",
-                'method'  => 'POST',
-                'content' => json_encode($data),
-            ],
-        ];
+	public function isLoggedIn() {
+		if (empty($_SESSION['username'])) {
+			return false;
+		}
+		
+		$user = $this->users->find($this->usernameColumn, strtolower($_SESSION['username']));
 
-        $context  = stream_context_create($options);
-        $result = file_get_contents($authUrl, false, $context);
-
-        if ($result === FALSE) {
-            return false;
-        }
-
-        $response = json_decode($result, true);
-        if (isset($response['access_token'])) {
-            return $response['access_token'];
-        } else {
-            return false;
-        }
-    }
-
-    public function validateToken($token) {
-        try {
-            $decoded = JWT::decode($token, new Key($this->secretKey, 'HS256'));
-            return (array) $decoded;
-        } catch (\Exception $e) {
-            return false;
-        }
-    }
-
-    public function isLoggedIn($token) {
-        $decoded = $this->validateToken($token);
-        if ($decoded) {
-            $user = $this->users->find($this->usernameColumn, strtolower($decoded['sub']));
-            if (!empty($user)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function getUser($token) {
-        $decoded = $this->validateToken($token);
-        if ($decoded) {
-            return $this->users->find($this->usernameColumn, strtolower($decoded['sub']))[0];
-        } else {
-            return false;
-        }
-    }
+		if (!empty($user) && $user[0]->{$this->passwordColumn} === $_SESSION['password']) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public function getUser() {
+		if ($this->isLoggedIn()) {
+			return $this->users->find($this->usernameColumn, strtolower($_SESSION['username']))[0];
+		}
+		else {
+			return false;
+		}
+	}
 }
+
